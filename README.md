@@ -21,11 +21,11 @@ Only **Python 3.x** is required.
 
 1.  Clone the repository:
     ```bash
-    git clone [YOUR_REPOSITORY_LINK]
+    git clone https://github.com/aresthebellator/TERM-DO.git
     ```
 2.  Run the file:
     ```bash
-    python your_file_name.py
+    python main.py
     ```
 
 Once started, use the main menu to select the desired operation (1, 2, 3, 4, or E).
@@ -36,7 +36,10 @@ The program saves data in `.txt` files named after the date (e.g., `15_12_25.txt
 
 ## 📜 License
 
-This project is licensed under the [MIT / APACHE 2.0 / GPL v3] License. See `LICENSE` for details.
+This project is licensed under the MIT License. See `LICENSE` for details.
+
+
+
 
 
 
@@ -60,7 +63,7 @@ Un semplice gestore di attività come To-Do scritto in Python, basato su file di
 
 1.  Clona il repository:
     ```bash
-    git clone [LINK_AL_TUO_REPOSITORY]
+    git clone https://github.com/aresthebellator/TERM-DO.git
     ```
 2.  Esegui il file:
     ```bash
@@ -75,4 +78,4 @@ Il programma salva i dati in file `.txt` nominati con la data (es. `15_12_25.txt
 
 ## 📜 Licenza
 
-Questo progetto è rilasciato sotto la Licenza [MIT / APACHE 2.0 / GPL v3]. Vedi `LICENSE` per i dettagli.
+Questo progetto è rilasciato sotto la Licenza MIT.  Vedi `LICENSE` per i dettagli.

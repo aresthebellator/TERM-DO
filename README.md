@@ -1,6 +1,6 @@
-###TERM-DO###
+### TERM-DO
 
-##🇬🇧
+## 🇬🇧
 
 A straightforward, file-based To-Do manager written in Python. It uses local text files for data storage, perfect for quick and local tracking of daily tasks.
 
@@ -40,7 +40,7 @@ This project is licensed under the [MIT / APACHE 2.0 / GPL v3] License. See `LIC
 
 
 
-##🇮🇹
+## 🇮🇹
 Un semplice gestore di attività come To-Do scritto in Python, basato su file di testo per la memorizzazione locale. Ideale per tenere traccia rapida degli impegni quotidiani.
 
 ## ✨ Caratteristiche

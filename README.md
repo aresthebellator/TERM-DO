@@ -25,7 +25,7 @@ Only **Python 3.x** is required.
     ```
 2.  Run the file:
     ```bash
-    python main.py
+    python3 main.py
     ```
 
 Once started, use the main menu to select the desired operation (1, 2, 3, 4, or E).

@@ -15,9 +15,11 @@ A straightforward, file-based To-Do manager written in Python. It uses local tex
 
 ### Prerequisites
 
-Only **Python 3.x** is required.
+Only **Python 3** is required.
 
 ### Launching the Program
+FOR WINDOWS JUST INSTALL THE FILE CALLED TERM-DO AND RUN IT
+
 LINUX-MACOS
 1.  Clone the repository:
     ```bash
@@ -28,7 +30,7 @@ LINUX-MACOS
     python3 main.py
     ```
 
-## FOR WINDOWS JUST INSTALL THE FILE CALLED TERM-DO AND RUN IT
+
 
 
 Once started, use the main menu to select the desired operation (1, 2, 3, 4, or E).

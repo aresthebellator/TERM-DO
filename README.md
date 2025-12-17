@@ -4,14 +4,14 @@
 
 A straightforward, file-based To-Do manager written in Python. It uses local text files for data storage, perfect for quick and local tracking of daily tasks.
 
-## ✨ Features
+##  Features
 
 * **Add:** Insert new activities with time and date (creates the file if it doesn't exist).
 * **Edit:** Change the description or time of an existing activity using its line index.
 * **Remove:** Delete a specific activity from the date's text file.
 * **View:** Display all saved activities for a specific day.
 
-## 🚀 How to Use
+##  How to Use
 
 ### Prerequisites
 
@@ -35,7 +35,7 @@ LINUX-MACOS
 
 Once started, use the main menu to select the desired operation (1, 2, 3, 4, or E).
 
-## 🛠️ Technical Notes
+## Technical Notes
 
 The program saves data in `.txt` files named after the date (e.g., `15_12_25.txt`).
 
@@ -51,14 +51,14 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 ## 🇮🇹
 Un semplice gestore di attività come To-Do scritto in Python, basato su file di testo per la memorizzazione locale. Ideale per tenere traccia rapida degli impegni quotidiani.
 
-## ✨ Caratteristiche
+##  Caratteristiche
 
 * **Aggiungi:** Inserisci nuove attività con orario e data (crea il file se non esiste).
 * **Modifica:** Cambia la descrizione o l'orario di un'attività esistente tramite l'indice della riga.
 * **Rimuovi:** Elimina una specifica attività dal file di testo della data.
 * **Visualizza:** Mostra tutte le attività salvate per un giorno specifico.
 
-## 🚀 Come Usarlo
+##  Come Usarlo
 
 ### Prerequisiti
 
@@ -77,7 +77,7 @@ Un semplice gestore di attività come To-Do scritto in Python, basato su file di
 
 Dopo l'avvio, usa il menu per scegliere l'operazione desiderata (1, 2, 3, 4 o E).
 
-## 🛠️ Note Tecniche
+##  Note Tecniche
 
 Il programma salva i dati in file `.txt` nominati con la data (es. `15_12_25.txt`).
 

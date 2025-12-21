@@ -25,17 +25,18 @@ def Welcome():
 def Menu():   
     print("-----------------------------------------------------------")
     print("\033[1;36mCHOOSE AN OPTION:\033[0m\n")
-    print("[1] Add activity")
-    print("[2] Edit activity")
-    print("[3] Remove activity")
-    print("[4] View all the activities")
-    print("[E] Exit\n")
+    print("\033[1;36m[1]\033[0m Add activity")
+    print("\033[1;36m[2]\033[0m Edit activity")
+    print("\033[1;36m[3]\033[0m Remove activity")
+    print("\033[1;36m[4]\033[0m View all the activities")
+    print("\033[1;31m[E] Exit\033[0m\n")
     return input("==> ")
 
 def Add():
     running_add = True
     while running_add:
         clear_screen()
+        Welcome()
         print("\033[1;36mADD ACTIVITY\033[0m")
         data = input("DAY: (ex: 15_12_25) or 'b' to go back: ")
         
@@ -54,23 +55,35 @@ def Add():
             else:
                 continue
 
-        # Sottociclo per aggiungere più attività allo stesso giorno
+        
         adding_items = True
         while adding_items:
             clear_screen()
-            print(f"--- Adding to {data} ---")
+            print(f"\033[1;36m--- Adding to {data} ---\033[0m]")
             new_activity = input("Write the activity: ")
-            time_activity = input("At: ")
+            req_time = input("Have you a specific time for this activity? (y/n)")
             
-            with open(filepath, 'a') as f:
-                f.write(f"ACTIVITY:    {new_activity}        TIME:  {time_activity}\n")
+            if req_time.lower() == 'y':
+                time_activity = input("At: ")
+                with open(filepath, 'a')as f:
+                    f.write(f"ACTIVITY:    {new_activity}        TIME:  {time_activity}\n")
+                print("\033[1;32mActivity added! \033[0m")
+                again = input("\nDo you wanna add another activity in THIS day? (y/n): ")
+                if again.lower() != 'y':
+                    adding_items = False    
             
-            print("\033[1;32mActivity added!\033[0m")
-            again = input("\nDo you wanna add another activity in THIS day? (y/n): ")
-            if again.lower() != 'y':
-                adding_items = False
+            elif req_time.lower() == 'n':
+                time_activity = "NO TIME"
+                with open(filepath,'a') as f:
+                    f.write(f"ACTIVITY:    {new_activity}        TIME:  {time_activity}\n")
+                print("\033[1;32mActivity added! \033[0m")
+                again = input("\nDo you wanna add another activity in THIS day? (y/n): ")
+                if again.lower() != 'y':
+                    adding_items = False
+            
+            
         
-        # Dopo aver finito con un giorno
+        
         print("\n[1] Change day / [2] Back to menu")
         choice = input("==> ")
         if choice != '1':
@@ -78,7 +91,12 @@ def Add():
 
 def Edit():
     clear_screen()
-    dateEdit = input("Enter the DATE you want to edit (e.g., 15_12_25): ")
+    Welcome()
+    print("\033[1;36mEDIT ACTIVITY\033[0m")
+    dateEdit = input("Enter the DATE you want to edit or press 'b' for back (e.g., 15_12_25): ")
+    if dateEdit == 'b':
+        return
+    
     filepath = dateEdit + ".txt"
 
     if os.path.exists(filepath):
@@ -116,34 +134,55 @@ def Edit():
 
 def Remove():
     clear_screen()
-    dataRemove = input("DATE of file to clean: ")
+    Welcome()
+    print("\033[1;36mREMOVE YOUR ACTIVITY\033[0m")
+    dataRemove = input("DATE of file to clean or press 'b' for back: ")
+    
+    if dataRemove.lower() == 'b':
+        return 
+    
     filepath = dataRemove + ".txt"
 
     if os.path.exists(filepath):
+        with open(filepath,'r') as file:
+            content = file.read()
+            print(content)
+        print("\n")
         activity_remove = input("Keyword of activity to remove: ")
         with open(filepath, 'r') as file:
             lines = file.readlines()
 
         lines_to_keep = [l for l in lines if activity_remove.lower() not in l.lower()]
-        
+    
         with open(filepath, 'w') as file:
             file.writelines(lines_to_keep)
-        
+    
         print(f"\033[1;32mDone. File updated.\033[0m")
-    else:
+        time.sleep(2) 
+    
+    else:   
         print("File not found.")
-    time.sleep(2)
+        time.sleep(2) 
+            
+
+    
 
 def View():
     clear_screen()
-    date = input("\033[1;36mDATE to view:\033[0m")
+    Welcome()
+    print("\033[1;36mDATE TO WIEW\033[0m")
+    date = input("Write here the date you need to wiew or press 'b' for back: ")
+    if date == 'b':
+        return
+    
     if os.path.exists(date + ".txt"):
-        print(f"\n--- Activities for {date} ---")
+        clear_screen()
+        print(f"\n\033[1;36m--- Activities for {date} ---\033[0m")
         with open(date + ".txt", 'r') as file:
             content = file.read()
-            print(content if content else "Empty file.")
+            print(content if content else "\033[1;31mEmpty file.\033[0m")
     else:
-        print("File not found.")
+        print("\033[1;31mFile not found.\033[0m")
     input("\nPress Enter to return to menu...")
 
 def main():

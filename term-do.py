@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # ===============================================
 # TERM-DO
 # Copyright (c) 2025 aresthebellator
@@ -24,9 +25,10 @@ def MenuProject():
     Welcome()
     print("-----------------------------------------------------------")
     print("\033[1;36m[1]\033[0m Create a project ")
-    print("\033[1;36m[2]\033[0m Edit a project ")
-    print("\033[1;36m[3]\033[0m View a project ")
-    print("\033[1;36m[4]\033[0m Remove a project ")
+    print("\033[1;36m[2]\033[0m Add task ")
+    print("\033[1;36m[3]\033[0m Edit a project ")
+    print("\033[1;36m[4]\033[0m View a project ")
+    print("\033[1;36m[5]\033[0m Remove a project ")
     print("\033[1;31m[B]\033[0m Back to main menu ")
     return input("==> ")
 
@@ -58,6 +60,30 @@ def CreateProject():
     print(f"{name} Created!")
     print("Now you can choose EDIT PROJECT to add tasks.")
     time.sleep(1)
+
+def AddTask():
+    clear_screen()
+    Welcome()
+    print("\033[1;36mADD TASK\033[0m")
+    nameP = input("Write here the name of the project: ")
+    filepath = nameP + ".txt"
+    if os.path.exists(filepath):
+        with open(filepath,'a') as f:
+                while True:
+                    nameT = input("Write the task here: ")
+                    f.write(f"\033[1;32mTASK:\033[0m  {nameT} \n")
+            
+                    choose = input("Do you want add new task (y/n) ")
+                    if choose.lower() == 'n':
+                        print("\033[1;36mTasks added!\033[0m")
+                        time.sleep(2)
+                        break
+
+    if not os.path.exists(filepath):
+        print("\033[1;31mPROJECT NAME INVALID\033[0m")
+        time.sleep(2)
+        return
+
 
 def Add():
     running_add = True
@@ -125,10 +151,15 @@ def EditProject():
             print(f"\033[1;33mThe Project {filepath} is empty.\033[0m")
             add = input("Do you want to add something? (y/n): ")
             if add.lower() == 'y':
-                new_task = input("Enter the new task: ")
-                with open(filepath, 'w') as file:
-                    file.write(f"TASK:  {new_task}\n")
-                print("\033[1;32mTask added!\033[0m")
+                while True:
+                    new_task = input("Enter the new task: ")
+                    with open(filepath, 'w') as file:
+                        file.write(f"TASK:  {new_task}\n")
+                        choose = input("Do you want add new task? (y/n): ")
+                        if choose.lower() == 'n':
+                            print("\033[1;32mTasks added!\033[0m")
+                            break
+                        
         else:
             print("\n### YOUR TASKS ###")
             for i, line in enumerate(lines):
@@ -306,9 +337,10 @@ def main():
         elif choice_type == 'p':
             choice = MenuProject()
             if choice == '1': CreateProject()
-            elif choice == '2': EditProject()
-            elif choice == '3': ViewP()
-            elif choice == '4': RemoveProject()
+            elif choice == '2': AddTask()
+            elif choice == '3': EditProject()
+            elif choice == '4': ViewP()
+            elif choice == '5': RemoveProject()
         elif choice_type == 'e':
             print("\033[1;31mProgram terminated!\033[0m")
             time.sleep(1)

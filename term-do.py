@@ -65,7 +65,9 @@ def AddTask():
     clear_screen()
     Welcome()
     print("\033[1;36mADD TASK\033[0m")
-    nameP = input("Write here the name of the project: ")
+    nameP = input("Write here the name of the project or press 'b' for back: ")
+    if nameP.lower() == 'b':
+        return 
     filepath = nameP + ".txt"
     if os.path.exists(filepath):
         with open(filepath,'a') as f:

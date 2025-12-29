@@ -12,12 +12,13 @@ def clear_screen():
 
 def Welcome():
     print("""\033[1;33m
-████████╗███████╗██████╗ ███╗   ███╗      ██████╗  ██████╗ 
-╚══██╔══╝██╔════╝██╔══██╗████╗ ████║      ██╔══██╗██╔═══██╗
-   ██║   █████╗  ██████╔╝██╔████╔██║█████╗██║  ██║██║   ██║
-   ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║╚════╝██║  ██║██║   ██║
-   ██║   ███████╗██║  ██║██║ ╚═╝ ██║      ██████╔╝╚██████╔╝
-   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝      ╚═════╝  ╚═════╝
+████████╗███████╗██████╗░███╗░░░███╗░░░░░██████╗░░█████╗░
+╚══██╔══╝██╔════╝██╔══██╗████╗░████║░░░░░██╔══██╗██╔══██╗
+░░░██║░░░█████╗░░██████╔╝██╔████╔██║░░░░░██║░░██║██║░░██║
+░░░██║░░░██╔══╝░░██╔══██╗██║╚██╔╝██║░░░░░██║░░██║██║░░██║
+░░░██║░░░███████╗██║░░██║██║░╚═╝░██║░░░░░██████╔╝╚█████╔╝
+░░░╚═╝░░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝░░░░░╚═════╝░░╚════╝░
+
     \033[0m""")
 
 def MenuProject():
@@ -25,7 +26,7 @@ def MenuProject():
     Welcome()
     print("-----------------------------------------------------------")
     print("\033[1;36m[1]\033[0m Create a project ")
-    print("\033[1;36m[2]\033[0m Add task ")
+    print("\033[1;36m[2]\033[0m Add task-Remove task")
     print("\033[1;36m[3]\033[0m Edit a project ")
     print("\033[1;36m[4]\033[0m View a project ")
     print("\033[1;36m[5]\033[0m Remove a project ")
@@ -48,7 +49,9 @@ def CreateProject():
     clear_screen()
     Welcome()
     print("\033[1;36mCREATE PROJECT\033[0m")
-    name = input("Write the name of the project: ")
+    name = input("Write the name of the project or press 'b' for back: ")
+    if name.lower() == 'b':
+        break
     filepath = name + ".txt"
     if os.path.exists(filepath):
         print("The project already exists! Try selecting EDIT PROJECT.")
@@ -61,30 +64,57 @@ def CreateProject():
     print("Now you can choose EDIT PROJECT to add tasks.")
     time.sleep(1)
 
-def AddTask():
+def AddORemoveTask():
     clear_screen()
     Welcome()
-    print("\033[1;36mADD TASK\033[0m")
-    nameP = input("Write here the name of the project or press 'b' for back: ")
-    if nameP.lower() == 'b':
-        return 
-    filepath = nameP + ".txt"
-    if os.path.exists(filepath):
-        with open(filepath,'a') as f:
-                while True:
-                    nameT = input("Write the task here: ")
-                    f.write(f"\033[1;32mTASK:\033[0m  {nameT} \n")
-            
-                    choose = input("Do you want add new task (y/n) ")
-                    if choose.lower() == 'n':
-                        print("\033[1;36mTasks added!\033[0m")
-                        time.sleep(2)
-                        break
+    print("\033[1;36mCHOOSE:\033[0m")
+    print("[1] ADD TASK")
+    print("[2] REMOVE TASK")
+    choose = input("==>")
+    if choose == '1':
 
-    if not os.path.exists(filepath):
-        print("\033[1;31mPROJECT NAME INVALID\033[0m")
-        time.sleep(2)
-        return
+        print("\033[1;36mADD TASK\033[0m")
+        nameP = input("Write here the name of the project or press 'b' for back: ")
+        if nameP.lower() == 'b':
+            return 
+        filepath = nameP + ".txt"
+        if os.path.exists(filepath):
+            with open(filepath,'a') as f:
+                    while True:
+                        nameT = input("Write the task here: ")
+                        f.write(f"\033[1;32mTASK:\033[0m  {nameT} \n")
+            
+                        choose = input("Do you want add new task (y/n) ")
+                        if choose.lower() == 'n':
+                            print("\033[1;36mTasks added!\033[0m")
+                            time.sleep(2)
+                            break
+
+        if not os.path.exists(filepath):
+            print("\033[1;31mPROJECT NAME INVALID\033[0m")
+            time.sleep(2)
+            return
+
+    elif choose == '2':
+        print("\033[1;36mREMOVE TASK\033[0m")
+        nameP = input("Write here the name of the project or press 'b' for back: ")
+        if nameP.lower() == 'b':
+            return
+        filepath = nameP +".txt"
+        if os.path.exists(filepath):
+            with open(filepath,'r') as file:
+                lines = file.readlines()
+            if not lines:
+                print("File is empty.")
+            else:
+                for i,line in enumerate(lines):
+                    print(f"[{i+1}] {line.strip()}")
+                    task_remove = input("\nKeyword of task to remove: ")
+                    lines_to_keep = [l for l in lines if task_remove.lower() not in l.lower()]
+                    with open(filepath,'w') as file:
+                        file.writelines(lines_to_keep)
+                    print("\033[1;32mDone. File updated-\033[0m")
+                
 
 
 def Add():
@@ -228,30 +258,18 @@ def Edit():
 def RemoveProject():
     clear_screen()
     Welcome()
-    print("\033[1;36mREMOVE TASK IN YOUR PROJECT\033[0m")
+    print("\033[1;36mREMOVE YOUR PROJECT\033[0m")
     nameP = input("Enter the name of the project or press 'b' for back: ")
     if nameP.lower() == 'b':
         return
 
     filepath = nameP + ".txt"
-    if os.path.exists(filepath):
-        with open(filepath,'r') as file:
-            lines = file.readlines()
-        
-        if not lines:
-            print("File is empty.")
-        else:
-            for i, line in enumerate(lines):
-                print(f"[{i+1}] {line.strip()}")
-            
-            task_remove = input("\nKeyword of task to remove: ")
-            lines_to_keep = [l for l in lines if task_remove.lower() not in l.lower()]
-            with open(filepath, 'w') as file:
-                file.writelines(lines_to_keep)
-            print("\033[1;32mDone. File updated.\033[0m")
-    else:
-        print("File not found.")
-    time.sleep(2)
+    os.system(f'rm -rf {filepath}')
+    print("\033[1;36mProject removed successfully\033[0m")
+    time.sleep(3)
+
+    
+    
 
 def Remove():
     clear_screen()
@@ -339,7 +357,7 @@ def main():
         elif choice_type == 'p':
             choice = MenuProject()
             if choice == '1': CreateProject()
-            elif choice == '2': AddTask()
+            elif choice == '2': AddORemoveTask()
             elif choice == '3': EditProject()
             elif choice == '4': ViewP()
             elif choice == '5': RemoveProject()

@@ -51,7 +51,7 @@ def CreateProject():
     print("\033[1;36mCREATE PROJECT\033[0m")
     name = input("Write the name of the project or press 'b' for back: ")
     if name.lower() == 'b':
-        break
+        return
     filepath = name + ".txt"
     if os.path.exists(filepath):
         print("The project already exists! Try selecting EDIT PROJECT.")

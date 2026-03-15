@@ -72,7 +72,7 @@ Un semplice gestore di attività come To-Do scritto in Python, basato su file di
     ```
 2.  Esegui il file:
     ```bash
-    python3 main.py
+    python3 term-do.py
     ```
 
 Dopo l'avvio, usa il menu per scegliere l'operazione desiderata (1, 2, 3, 4 o E).
